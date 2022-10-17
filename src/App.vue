@@ -1,26 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <section>
+    <h1>ชื่อ:{{firstname}}</h1>
+    <h2>{{lastname}}</h2>
+    <p>:อายุ{{age+age}}</p>
+  </section>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data(){ // data() ใช้ return ข้อมูล ในรูป Object ไปใช้ใน template
+    return{
+      firstname:"บาส",
+      lastname:"ครับ",
+      age:11
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
