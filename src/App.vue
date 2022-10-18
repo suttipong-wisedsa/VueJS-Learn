@@ -16,21 +16,30 @@
     <img v-bind:src="picture" width="80" height="80" ref="imageEl" />
     <!--ผูกตัวแปรกับ attibult(src)ที่ทำงานใน html-->
     <!--ref ใช้อ้างอิงโครงสร้างใน tag ไปใช้ใน script-->
-    <!--v-if&&v-else-->
-    <p v-if="hobby.length === 0">ไม่มีงานอดิเรก</p>
-    <div v-else>
+    <!--V-show ไว้แสดง element-->
+    <button @click="toggle">Toggle{{ isActive }}</button>
+    <!--เขียนแบบลดรูป(ternary operater)-->
+    <button @click="toggle">{{ isActive ? "แสดง" : "ซ่อน" }}</button>
+    <div v-show="isActive">
+      <!--v-if&&v-else-->
+      <p v-if="hobby.length === 0">ไม่มีงานอดิเรก</p>
+      <div v-else>
+        <!--Loop Array คล้ายๆ Map()-->
+        <ul>
+          <li v-for="(item, index) in hobby" :key="index">
+            {{ index + 1 }}.{{ item }}
+          </li>
+        </ul>
+      </div>
+      <p>ข้อมูลพื้นฐาน</p>
+      <!--Loop array object-->
       <ul>
-        <li>{{ hobby[0] }}</li>
-        <li>{{ hobby[1] }}</li>
-        <li>{{ hobby[2] }}</li>
+        <li v-for="(item, key) in general" :key="key">
+          {{ key }}.{{ item }}
+          <!--{key:value(item)}-->
+        </li>
       </ul>
     </div>
-    <p>ข้อมูลพื้นฐาน</p>
-    <ul>
-      <li>เพศ:{{ general.general }}</li>
-      <li>น้ำหนัก:{{ general.weight }}</li>
-      <li>ส่วนสูง:{{ general.height }}</li>
-    </ul>
     <!--Event-->
     <button @click="showData">คลิกปุ่ม</button>
     <button @click="increment(10)">เพิ่ม 10</button>
@@ -54,8 +63,9 @@ export default {
       b: String,
       nickName: "",
       picture: "https://cdn-icons-png.flaticon.com/512/276/276130.png",
-      hobby: ["ถ่ายรูป", "ปั่นจักรยาน", "ฟังเพลง"],
+      hobby: ["ถ่ายรูป", "ปั่นจักรยาน", "ฟังเพลง", "เล่นเกม", "ทำอารหาร"],
       general: { gender: "ชาย", weight: 70, height: 170, status: false },
+      isActive: false,
     };
   },
   methods: {
@@ -84,8 +94,15 @@ export default {
       alert("บันทึก");
       console.log(this.$refs.imageEl);
     },
+    toggle() {
+      this.isActive = !this.isActive;
+    },
   },
 };
 </script>
 
-<style></style>
+<style>
+button {
+  display: block;
+}
+</style>
